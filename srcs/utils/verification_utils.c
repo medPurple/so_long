@@ -6,58 +6,47 @@
 /*   By: wmessmer <wmessmer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 13:04:58 by wmessmer          #+#    #+#             */
-/*   Updated: 2022/12/16 18:23:46 by wmessmer         ###   ########.fr       */
+/*   Updated: 2022/12/20 17:39:02 by wmessmer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "../../include/so_long.h"
 
 int nb_ligne(char *path)
 {
-	int		file;
-	int		count;
-	char	buf[1];
-	int 	wc;
-
-	file = open(path, O_RDWR);
-	if (file == -1)
-		return -1;
-	count = 0;
-	while ((wc = read(file, buf, 1)))
-	{
-		//write(1, buf, 1);
-		if (*buf == '\n')
-			count++;
-	}
-	close(file);
-	return (count);
-} 
-
-int count_size_line(char *path,int max, int line)
-{
-	int		count;
-	char 	buf[1];
-	int 	line_count;
-	int 	file;
-	int 	wc;
+	int		fd;
+	char	*line;
+	int		line_count;
 
 	line_count = 0;
-	count = 0;
-	file = open(path, O_RDWR);
-	if (file == -1)
-		return -1;
-	while ((wc = read(file, buf, 1)) && line_count <= max)
+	fd = open(path, O_RDONLY);
+	line = get_next_line(fd);
+	while (line != NULL)
 	{
-		count++;
-		if (*buf == '\n')
-		{
-			line_count++;
-			if (line_count == line)
-				break;
-			count = 0;
-		}
-		wc = read(file, buf, 1);
+		line_count++;
+		free(line);
+		line = get_next_line(fd);
 	}
-	close(file);
-	return (count);
+	close(fd);
+	return (line_count);
+}
+
+t_map transfet_map_to_game(char **map,t_map *map_info,char *path)
+{
+	 int i,j;
+    i = 0;
+    while(map[i])
+    {
+        j = 0;
+        while (map[i][j])
+        {
+            if (map[i][j] == 'C')
+                map_info->collectible_count++;
+            j++;
+        }
+        i++;
+    }
+    map_info->col = ft_strlen(map[0]) -1;
+    map_info->row = nb_ligne(path);
+	return (*map_info);
 }

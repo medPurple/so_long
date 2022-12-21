@@ -6,23 +6,31 @@
 /*   By: wmessmer <wmessmer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 13:15:05 by wmessmer          #+#    #+#             */
-/*   Updated: 2022/12/16 18:09:08 by wmessmer         ###   ########.fr       */
+/*   Updated: 2022/12/21 19:21:29 by wmessmer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/so_long.h"
 
 int main(int ac, char **av)
-{   
+{
+    t_game game;
+    t_map map;
+
     if (ac != 2)
         return (map_error(0));
-    else if (ber_verification(av[1]) != 1)
+    game.map = map_generation(av[1]);
+    if (game.map == NULL)
         return (map_error(1));
-    else if (map_verification_wall(av) != 1)
-        return (map_error(2));
-    else if (map_verification_path(av) != 1)
-        return (map_error(3));
-    
-    
+    if (map_check(game.map, av[1]) != 1)
+    {
+        //free map
+        return (0);
+    }
+    ft_printf("map ok\n");
+    game = map_final_init(&game,transfet_map_to_game(game.map,&map,av[1]));
+    player_init(&game);
+    window_initialisation(&game);
+    image_initialisation(&game);
     return (0);
 }
