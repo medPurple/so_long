@@ -1,5 +1,5 @@
 NAME		=	so_long
-CC			=	cc
+CC			=	@cc
 FLAGS		=	-Wall -Wextra -Werror
 LFT			=	lib/libft_perso/libft.a
 INC			=	-I./include -I./lib/libft_perso -I./lib/minilibx-linux
@@ -12,21 +12,19 @@ SRC			=  srcs/map/map.c \
 			   srcs/utils/verification_utils.c \
 			   srcs/player/player.c \
 			   srcs/window/ft_init.c \
+			   srcs/window/ft_game.c \
 
 all:		$(MLX) $(LFT) $(NAME)
 
 $(NAME):	$(OBJ)
 			$(CC) $(FLAGS) -o $@ $^ main.c $(LIB)
+			@echo "\nCompilation so_long [OK]\n"
 
 
 $(LFT):		
-			@echo " [ .. ] | Compiling libft.."
 			@make -s -C lib/libft_perso
-			@echo " [ OK ] | Libft ready!"
 
-
-%.o:		src/%.c
-			$(CC) $(FLAGS) $(INC) -o $@ -c $<
+%.o:		$(CC) $(FLAGS) $(INC) -o $@ -c $<
 
 clean:
 			@make -s $@ -C lib/libft_perso

@@ -6,7 +6,7 @@
 /*   By: wmessmer <wmessmer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 18:04:43 by wmessmer          #+#    #+#             */
-/*   Updated: 2022/12/21 19:14:45 by wmessmer         ###   ########.fr       */
+/*   Updated: 2022/12/22 15:44:47 by wmessmer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@
 # include "../lib/minilibx-linux/mlx.h"
 # include "../lib/minilibx-linux/mlx_int.h"
 # include "../lib/libft_perso/include/libft.h"
+# include <X11/keysym.h>
+# include <X11/X.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
 
 # define IMG_SIZE 32
 # define GROUND_IMG "../img_xpm/ML_game/ground.xpm"
@@ -99,7 +104,12 @@ void player_init(t_game *player);
 /*img*/
 void image_initialisation(t_game *game);
 int render_maps(t_game *game);
-void img_parsing(t_game *game, int width, int i, int j);
+void img_parsing(t_game *game, int i, int j);
+
+void	loop_images(t_game game);
+int	handle_resize(t_game *data);
+int	handle_keypress(int keysym, t_game *data);
+int	handle_btnrealease(t_game *data);
 
 
 #endif

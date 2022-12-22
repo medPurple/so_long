@@ -6,7 +6,7 @@
 /*   By: wmessmer <wmessmer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 13:15:05 by wmessmer          #+#    #+#             */
-/*   Updated: 2022/12/21 19:21:29 by wmessmer         ###   ########.fr       */
+/*   Updated: 2022/12/22 16:01:47 by wmessmer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int main(int ac, char **av)
     game = map_final_init(&game,transfet_map_to_game(game.map,&map,av[1]));
     player_init(&game);
     window_initialisation(&game);
-    image_initialisation(&game);
+    loop_images(game);
+
     return (0);
 }
