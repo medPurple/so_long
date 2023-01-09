@@ -6,7 +6,7 @@
 /*   By: wmessmer <wmessmer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 18:15:10 by wmessmer          #+#    #+#             */
-/*   Updated: 2022/12/20 17:34:36 by wmessmer         ###   ########.fr       */
+/*   Updated: 2023/01/09 15:49:01 by wmessmer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int map_check(char **map, char *file)
             {
                 if (content_nb_verification(map,&map_info) == 1)
                 {
-                    return(1);
+                        return(1);
                 }
             }
         }
@@ -62,8 +62,6 @@ char **map_generation(char *file)
             return (NULL);
         backup = map;
         map = ft_strjoin(backup,fichier);
-        //free(backup);
-        //free(fichier);
     }
     map_final = ft_split(map,'\n');
     free(map);
@@ -73,14 +71,13 @@ char **map_generation(char *file)
 
 t_game map_final_init(t_game *map,t_map info)
 {
-    map->win_width = info.col * IMG_SIZE;
-    ft_printf("%i\n",map->win_width);
-    map->win_height = info.row * IMG_SIZE;
-    ft_printf("%i\n",map->win_height);
+    map->win_width = (info.col + 1) * IMG_SIZE;
+    //ft_printf("%i\n",map->win_width);
+    map->win_height = (info.row + 1) * IMG_SIZE;
+    //ft_printf("%i\n",map->win_height);
     map->img_height = IMG_SIZE;
     map->img_width = IMG_SIZE;
     map->moves = 0;
-    map->end_game = 0;
     map->collectable = info.collectible_count;
     map->collected = 0;
     return(*map);

@@ -6,7 +6,7 @@
 /*   By: wmessmer <wmessmer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 18:04:43 by wmessmer          #+#    #+#             */
-/*   Updated: 2022/12/22 15:44:47 by wmessmer         ###   ########.fr       */
+/*   Updated: 2023/01/09 18:41:38 by wmessmer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,20 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 
-# define IMG_SIZE 32
-# define GROUND_IMG "../img_xpm/ML_game/ground.xpm"
-# define WALL_IMG "../img_xpm/ML_game/wall.xpm"
-# define EXIT_IMG_C "../img_xpm/ML_game/exit_c.xpm"
-# define EXIT_IMG_O "../img_xpm/ML_game/exit_o.xpm"
-# define PLAYER_IMG "../img_xpm/ML_game/plqyer.xpm"
-# define ENEMY_IMG1 "../img_xpm/ML_game/enemy1.xpm"
-# define COLLECTABLE_IMG1 "../img_xpm/ML_game/collectable1.xpm"
+# define IMG_SIZE 64
+# define COLOR_RESET "\e[0m"
+# define RED "\e[0;31m"
+# define GRN "\e[0;32m"
+# define YEL "\e[0;33m"
+# define MAG "\e[0;35m"
+# define BLU "\e[0;34m"
+# define GROUND_IMG "img_xpm/ML_game/ground.xpm"
+# define WALL_IMG "img_xpm/ML_game/wall.xpm"
+# define EXIT_IMG_C "img_xpm/ML_game/exit_c.xpm"
+# define EXIT_IMG_O "img_xpm/ML_game/exit_o.xpm"
+# define PLAYER_IMG "img_xpm/ML_game/plqyer.xpm"
+# define ENEMY_IMG1 "img_xpm/ML_game/enemy1.xpm"
+# define COLLECTABLE_IMG1 "img_xpm/ML_game/collectable1.xpm"
 
 
 
@@ -42,21 +48,16 @@ typedef struct s_game
 	void	*img_ground;
 	void	*img_wall;
 	void	*enemy_img1;
+	void	*img_player;
 	void	*img_collectable;
 	void	*img_collectable2;
 	void	*img_collectable3;
 	void	*img_exit_close;
 	void	*img_exit_open;
 	void	*img_start;
-	void	*img_player;
-	void	*player_w;
-	void	*player_a;
-	void	*player_s;
-	void	*player_d;
 	char	**map; //ok
-	int		player_direction;
-	int		x;
-	int		y;
+	int		player_x;
+	int		player_y;
 	int		img_width;//
 	int		img_height;//
 	int		win_width;//
@@ -64,7 +65,8 @@ typedef struct s_game
 	int		moves;//
 	int		collected;//
 	int		collectable;//
-	int		end_game;
+	int		end_game_ok;//
+	int		collectable_valid;//
 }	t_game;
 
 typedef struct s_map
@@ -74,6 +76,7 @@ typedef struct s_map
 	int	exit_count;
 	int	start_count;
 	int	collectible_count;
+	int end_game_ok;
 }	t_map;
 
 /*map*/
@@ -88,6 +91,11 @@ int ber_extension(char *file);
 int content_verification(char **map);
 int wall_verification(char **map, t_map *map_info, char *path);
 int content_nb_verification(char **map, t_map *map_info);
+
+/* backtracking*/
+int map_verification_path(t_game *game);
+int pathfinder(t_game *game,int i, int j,int **grid);
+int **blanktab(t_map *map);
 
 /*utils*/
 int nb_ligne(char *path);
@@ -111,5 +119,18 @@ int	handle_resize(t_game *data);
 int	handle_keypress(int keysym, t_game *data);
 int	handle_btnrealease(t_game *data);
 
+/* action */
+
+int  ft_action_keyboard(int key, t_game *game);
+void ft_move_player(t_game *game, int y, int x);
+
+/* end */
+int game_victory(t_game *game);
+int game_close(t_game *game);
+
+/* free */
+void free_all_game(t_game *game);
+void ft_img_destroyer(t_game *game);
+void ft_map_destroyer(t_game *game);
 
 #endif

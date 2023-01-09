@@ -6,7 +6,7 @@
 /*   By: wmessmer <wmessmer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 17:55:23 by wmessmer          #+#    #+#             */
-/*   Updated: 2022/12/21 16:18:44 by wmessmer         ###   ########.fr       */
+/*   Updated: 2023/01/09 11:49:54 by wmessmer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,5 @@ int content_nb_verification(char **map, t_map *map_info)
     }
     if (map_info->start_count != 1 || map_info->exit_count != 1 || map_info->collectible_count <= 0)
         return(map_error(6));
-    return (1);
-}
-int map_verification_path(char **file)
-{
-    (void)file;
     return (1);
 }

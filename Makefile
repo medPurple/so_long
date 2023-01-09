@@ -7,12 +7,13 @@ LIB			=	-L./lib/libft_perso -lft -lXext -lX11 -lm -lbsd -L./lib/minilibx-linux -
 OBJ			=	$(SRC:.c=.o)
 SRC			=  srcs/map/map.c \
 		 	   srcs/map/verification.c \
-		 	   srcs/player/player.c \
+			   srcs/map/backtracking.c \
 			   srcs/utils/error.c \
 			   srcs/utils/verification_utils.c \
-			   srcs/player/player.c \
+			   srcs/utils/free_all_game.c \
 			   srcs/window/ft_init.c \
-			   srcs/window/ft_game.c \
+			   srcs/game/ft_game.c \
+			   srcs/game/player.c \
 
 all:		$(MLX) $(LFT) $(NAME)
 

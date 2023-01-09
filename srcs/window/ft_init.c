@@ -6,7 +6,7 @@
 /*   By: wmessmer <wmessmer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 19:22:48 by wmessmer          #+#    #+#             */
-/*   Updated: 2022/12/22 15:56:53 by wmessmer         ###   ########.fr       */
+/*   Updated: 2023/01/09 09:06:32 by wmessmer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,6 @@ int render_maps(t_game *game)
     {
         while (game->map[i][j] && game->map[i][j] != '\n')
         {
-            ft_printf("parsing\n");
-            ft_printf(" i = %i\n",i);
-            ft_printf(" j = %i\n",j);
             img_parsing(game, i, j);
             j++;
         }
@@ -104,15 +101,16 @@ void img_parsing(t_game *game, int i, int j)
     char    **carte;
 
     carte = game->map;
-    ft_printf(" map = %c\n",carte[i][j]);
     if (carte[i][j] == '1')
-        mlx_put_image_to_window(game->mlx, game->win, game->img_wall, i * IMG_SIZE, j * IMG_SIZE);
+        mlx_put_image_to_window(game->mlx, game->win, game->img_wall, j * IMG_SIZE, i * IMG_SIZE);
     else if (carte[i][j] == '0')
-        mlx_put_image_to_window(game->mlx, game->win, game->img_ground, i * IMG_SIZE, j * IMG_SIZE);
+        mlx_put_image_to_window(game->mlx, game->win, game->img_ground, j * IMG_SIZE, i * IMG_SIZE);
     else if (carte[i][j] == 'P')
-        mlx_put_image_to_window(game->mlx, game->win, game->img_player, i * IMG_SIZE, j * IMG_SIZE);
-    else if (carte[i][j] == 'E')
-        mlx_put_image_to_window(game->mlx, game->win, game->img_exit_close, i * IMG_SIZE, j * IMG_SIZE);
+        mlx_put_image_to_window(game->mlx, game->win, game->img_player, j * IMG_SIZE, i * IMG_SIZE);
+    else if (carte[i][j] == 'E' && game->collected != game->collectable)
+        mlx_put_image_to_window(game->mlx, game->win, game->img_exit_close, j * IMG_SIZE, i * IMG_SIZE);
+    else if (carte[i][j] == 'E' && game->collected == game->collectable)
+        mlx_put_image_to_window(game->mlx, game->win, game->img_exit_open, j * IMG_SIZE, i * IMG_SIZE);
     else if (carte[i][j] == 'C')
-        mlx_put_image_to_window(game->mlx, game->win, game->img_collectable, i * IMG_SIZE, j * IMG_SIZE);
+        mlx_put_image_to_window(game->mlx, game->win, game->img_collectable, j * IMG_SIZE, i * IMG_SIZE);
 }

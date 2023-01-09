@@ -6,7 +6,7 @@
 /*   By: wmessmer <wmessmer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 13:15:05 by wmessmer          #+#    #+#             */
-/*   Updated: 2022/12/22 16:01:47 by wmessmer         ###   ########.fr       */
+/*   Updated: 2023/01/09 18:23:37 by wmessmer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,13 @@ int main(int ac, char **av)
         //free map
         return (0);
     }
-    ft_printf("map ok\n");
     game = map_final_init(&game,transfet_map_to_game(game.map,&map,av[1]));
     player_init(&game);
+    map_verification_path(&game);
+    ft_printf(BLU"\n======================== GAME STARTED ========================\n\n"COLOR_RESET);
     window_initialisation(&game);
-    loop_images(game);
-
+    mlx_hook(game.win, KeyPress, KeyPressMask, ft_action_keyboard, &game);
+    mlx_loop(game.mlx);
+    free_all_game(&game);
     return (0);
 }
