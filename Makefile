@@ -1,6 +1,6 @@
 NAME		=	so_long
 CC			=	@cc
-FLAGS		=	-Wall -Wextra -Werror
+FLAGS		=	-Wall -Wextra -Werror -g3
 LFT			=	lib/libft_perso/libft.a
 INC			=	-I./include -I./lib/libft_perso -I./lib/minilibx-linux
 LIB			=	-L./lib/libft_perso -lft -lXext -lX11 -lm -lbsd -L./lib/minilibx-linux -lmlx 

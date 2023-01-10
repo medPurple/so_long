@@ -6,7 +6,7 @@
 /*   By: wmessmer <wmessmer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 17:33:23 by wmessmer          #+#    #+#             */
-/*   Updated: 2023/01/08 19:20:09 by wmessmer         ###   ########.fr       */
+/*   Updated: 2023/01/10 11:11:56 by wmessmer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ int mlx_error(int i)
 {
     if (i == 1)
         ft_printf("Bro mlx can't create the window... cringe");
-    return (0);
+    exit(1);
 }
 

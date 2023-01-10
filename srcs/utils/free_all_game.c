@@ -6,7 +6,7 @@
 /*   By: wmessmer <wmessmer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 08:55:20 by wmessmer          #+#    #+#             */
-/*   Updated: 2023/01/09 11:45:52 by wmessmer         ###   ########.fr       */
+/*   Updated: 2023/01/10 11:09:24 by wmessmer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void free_all_game(t_game *game)
     mlx_destroy_window(game->mlx,game->win);
     mlx_destroy_display(game->mlx);
     free (game->mlx);
-    free (game);
+    // free (game);
 }
 
 void ft_img_destroyer(t_game *game)

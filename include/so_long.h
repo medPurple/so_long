@@ -6,7 +6,7 @@
 /*   By: wmessmer <wmessmer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 18:04:43 by wmessmer          #+#    #+#             */
-/*   Updated: 2023/01/09 18:41:38 by wmessmer         ###   ########.fr       */
+/*   Updated: 2023/01/10 11:37:40 by wmessmer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 
-# define IMG_SIZE 64
+# define IMG_SIZE 48
 # define COLOR_RESET "\e[0m"
 # define RED "\e[0;31m"
 # define GRN "\e[0;32m"
@@ -93,8 +93,8 @@ int wall_verification(char **map, t_map *map_info, char *path);
 int content_nb_verification(char **map, t_map *map_info);
 
 /* backtracking*/
-int map_verification_path(t_game *game);
-int pathfinder(t_game *game,int i, int j,int **grid);
+int map_verification_path(t_game *game,t_map *map);
+int pathfinder(t_game *game,int i, int j,int **grid,t_map *map);
 int **blanktab(t_map *map);
 
 /*utils*/
