@@ -6,7 +6,7 @@
 /*   By: wmessmer <wmessmer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 19:22:48 by wmessmer          #+#    #+#             */
-/*   Updated: 2023/01/09 09:06:32 by wmessmer         ###   ########.fr       */
+/*   Updated: 2023/01/13 11:22:00 by wmessmer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,48 +29,12 @@ int window_initialisation(t_game *window)
 
 void image_initialisation(t_game *game)
 {
-    game->img_ground = mlx_xpm_file_to_image(game->mlx,GROUND_IMG,&game->img_width,&game->img_height);
-    if (game->img_width == 0 || game->img_height == 0)
-    {
-        ft_printf("stop");
-        mlx_error(1);
-    }
-    game->img_wall = mlx_xpm_file_to_image(game->mlx,WALL_IMG,&game->img_width,&game->img_height);
-    if (game->img_width == 0 || game->img_height == 0)
-    {
-        ft_printf("stop");
-        mlx_error(1);
-    }
-    game->img_exit_close = mlx_xpm_file_to_image(game->mlx,EXIT_IMG_C,&game->img_width,&game->img_height);
-    if (game->img_width == 0 || game->img_height == 0)
-    {
-        ft_printf("stop");
-        mlx_error(1);
-    }
-    game->img_exit_open = mlx_xpm_file_to_image(game->mlx,EXIT_IMG_O,&game->img_width,&game->img_height);
-    if (game->img_width == 0 || game->img_height == 0)
-    {
-        ft_printf("stop");
-        mlx_error(1);
-    }
-    game->img_player = mlx_xpm_file_to_image(game->mlx,PLAYER_IMG,&game->img_width,&game->img_height);
-    if (game->img_width == 0 || game->img_height == 0)
-    {
-        ft_printf("stop");
-        mlx_error(1);
-    }
-    game->enemy_img1 = mlx_xpm_file_to_image(game->mlx,ENEMY_IMG1,&game->img_width,&game->img_height); 
-    if (game->img_width == 0 || game->img_height == 0)
-    {
-        ft_printf("stop");
-        mlx_error(1);
-    }
+    obstacle_to_img(game);
+    game->img_ground1 = mlx_xpm_file_to_image(game->mlx,GROUND_IMG1,&game->img_width,&game->img_height);
     game->img_collectable = mlx_xpm_file_to_image(game->mlx,COLLECTABLE_IMG1,&game->img_width,&game->img_height);
-    if (game->img_width == 0 || game->img_height == 0)
-    {
-        ft_printf("stop");
-        mlx_error(1);
-    }
+    game->img_player = mlx_xpm_file_to_image(game->mlx,PLAYER_IMG,&game->img_width,&game->img_height);
+    game->img_exit_close = mlx_xpm_file_to_image(game->mlx,EXIT_IMG_C,&game->img_width,&game->img_height);
+    game->img_exit_open = mlx_xpm_file_to_image(game->mlx,EXIT_IMG_O,&game->img_width,&game->img_height);
     render_maps(game);
    
 }
@@ -78,39 +42,37 @@ void image_initialisation(t_game *game)
 int render_maps(t_game *game)
 {
     int i = 0;
-    size_t j = 0;
-    int width = 0;
+    int j = 0;
     if (game->win == NULL)
         return (mlx_error(1));
 
     while (game->map[i])
     {
-        while (game->map[i][j] && game->map[i][j] != '\n')
+        while (game->map[i][j])
         {
             img_parsing(game, i, j);
             j++;
         }
         j = 0;
-        width = 0;
         i++;
     }
     return (1);
 }
 void img_parsing(t_game *game, int i, int j)
 {
-    char    **carte;
-
-    carte = game->map;
-    if (carte[i][j] == '1')
-        mlx_put_image_to_window(game->mlx, game->win, game->img_wall, j * IMG_SIZE, i * IMG_SIZE);
-    else if (carte[i][j] == '0')
-        mlx_put_image_to_window(game->mlx, game->win, game->img_ground, j * IMG_SIZE, i * IMG_SIZE);
-    else if (carte[i][j] == 'P')
+    if (game->map[i][j] == '1')
+    {
+       define_obstacle(game,j,i);
+    }
+    else if (game->map[i][j] == '0')
+        mlx_put_image_to_window(game->mlx, game->win, game->img_ground1, j * IMG_SIZE, i * IMG_SIZE);
+    else if (game->map[i][j] == 'P')
         mlx_put_image_to_window(game->mlx, game->win, game->img_player, j * IMG_SIZE, i * IMG_SIZE);
-    else if (carte[i][j] == 'E' && game->collected != game->collectable)
-        mlx_put_image_to_window(game->mlx, game->win, game->img_exit_close, j * IMG_SIZE, i * IMG_SIZE);
-    else if (carte[i][j] == 'E' && game->collected == game->collectable)
+    else if (game->map[i][j] == 'E' && game->collected == game->collectable)
         mlx_put_image_to_window(game->mlx, game->win, game->img_exit_open, j * IMG_SIZE, i * IMG_SIZE);
-    else if (carte[i][j] == 'C')
+    else if (game->map[i][j] == 'E')
+        mlx_put_image_to_window(game->mlx, game->win, game->img_exit_close, j * IMG_SIZE, i * IMG_SIZE);
+    else if (game->map[i][j] == 'C')
         mlx_put_image_to_window(game->mlx, game->win, game->img_collectable, j * IMG_SIZE, i * IMG_SIZE);
 }
+

@@ -6,7 +6,7 @@
 /*   By: wmessmer <wmessmer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 14:18:40 by wmessmer          #+#    #+#             */
-/*   Updated: 2023/01/09 10:25:40 by wmessmer         ###   ########.fr       */
+/*   Updated: 2023/01/13 08:30:14 by wmessmer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int ft_action_keyboard(int key, t_game *game)
     else if (key == XK_Left || key == XK_a) //move left
         ft_move_player(game, game->player_y , game->player_x - 1);
     if (key == XK_Escape) // esc
-       game_close(game);
+        game_close(game);
     ft_printf("Move count : %d\n", game->moves);
     return (0);  
 }
@@ -46,7 +46,7 @@ void ft_move_player(t_game *game, int y, int x)
         game->player_y = y;
         game->map[y][x] = 'P';
         game->moves += 1;
-        render_maps(game);
+        map_actualisation(game,lx,ly);
     }
 }
     
@@ -69,4 +69,10 @@ int game_close(t_game *game)
     free_all_game(game);
     ft_printf(GRN"======================== Exit completed ======================\n\n"COLOR_RESET);
     exit(0);
+}
+
+int	ft_mouse(t_game *game)
+{
+	game_close(game);
+	exit(0);
 }

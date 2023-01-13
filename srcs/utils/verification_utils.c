@@ -6,7 +6,7 @@
 /*   By: wmessmer <wmessmer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 13:04:58 by wmessmer          #+#    #+#             */
-/*   Updated: 2022/12/20 17:39:02 by wmessmer         ###   ########.fr       */
+/*   Updated: 2023/01/13 17:50:48 by wmessmer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,22 +31,42 @@ int nb_ligne(char *path)
 	return (line_count);
 }
 
-t_map transfet_map_to_game(char **map,t_map *map_info,char *path)
+void exit_init(t_game *game)
 {
-	 int i,j;
+    int i;
+    int j;
+
     i = 0;
-    while(map[i])
+    while (i < game->mappy.row)
     {
         j = 0;
-        while (map[i][j])
+        while (j < game->mappy.col)
         {
-            if (map[i][j] == 'C')
-                map_info->collectible_count++;
+            if (game->map[i][j] == 'E')
+            {
+                game->exit_y = i;
+                game->exit_x = j;
+            }
             j++;
         }
         i++;
     }
-    map_info->col = ft_strlen(map[0]) -1;
-    map_info->row = nb_ligne(path);
-	return (*map_info);
+}
+
+void printmap(int **map_copy, int r, int c)
+{
+    int i = 0;
+    int j = 0;
+    while (i < r)
+    {
+        while (j < c)
+        {
+            ft_printf("%d",map_copy[i][j]);
+            j++;
+        }
+        j = 0;
+        i++;
+        printf("\n");
+    }
+    printf("\n");
 }
