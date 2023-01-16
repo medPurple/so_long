@@ -6,7 +6,7 @@
 /*   By: wmessmer <wmessmer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 18:04:43 by wmessmer          #+#    #+#             */
-/*   Updated: 2023/01/13 17:29:18 by wmessmer         ###   ########.fr       */
+/*   Updated: 2023/01/16 19:31:27 by wmessmer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
-# include <math.h>
+# include <time.h>
 
 # define IMG_SIZE 48
 # define COLOR_RESET "\e[0m"
@@ -47,6 +47,23 @@
 # define ENEMY_IMG1 "img_xpm/enemy_i.xpm"
 # define COLLECTABLE_IMG1 "img_xpm/collectible.xpm"
 
+#define w_player_s "img_xpm/player_back_static.xpm"
+#define w_player_m1 "img_xpm/player_back_move1.xpm"
+#define w_player_m2 "img_xpm/player_back_move2.xpm"
+
+#define s_player_s "img_xpm/player_front_static.xpm"
+#define s_player_m1 "img_xpm/player_front_move1.xpm"
+#define s_player_m2 "img_xpm/player_front_move2.xpm"
+
+#define a_player_s "img_xpm/player_left_static.xpm"
+#define a_player_m1 "img_xpm/player_left_move1.xpm"
+#define a_player_m2 "img_xpm/player_left_move2.xpm"
+
+#define d_player_s "img_xpm/player_right_static.xpm"
+#define d_player_m1 "img_xpm/player_right_move1.xpm"
+#define d_player_m2 "img_xpm/player_right_move2.xpm"
+
+
 
 
 
@@ -66,7 +83,7 @@ typedef struct s_map
 typedef struct s_player
 {
 	void	*w_player_static;
-	void	*w_player_mover1;
+	void	*w_player_move1;
 	void	*w_player_move2;
 	void	*d_player_static;
 	void	*d_player_move1;
@@ -77,6 +94,11 @@ typedef struct s_player
 	void	*s_player_static;
 	void	*s_player_move1;
 	void	*s_player_move2;
+	int 	key_w;
+	int 	key_s;
+	int 	key_a;
+	int 	key_d;
+	
 }	t_player;
 
 typedef struct s_game
@@ -84,7 +106,6 @@ typedef struct s_game
 	void	*mlx;
 	void	*win;
 	
-	void	*ground;
 	void	*img_ground1;
 	void	*img_ground2;
 	void	*img_ground3;
@@ -117,18 +138,19 @@ typedef struct s_game
 	int 	exit_x;
 	int		exit_y;
 	t_map	mappy;
+	t_player player;
 }	t_game;
 
 /*map*/
 int map_check(t_game *game, char *file);
-void map_init(t_game *game);
+void map_init(t_game *game,char *path);
 char **map_generation(char *file);
 void map_final_init(t_game *game);
 
 
 /*verif*/
 int ber_extension(char *file);
-int content_verification(char **map);
+int content_verification(t_game *game);
 int wall_verification(t_game *game, char *path);
 int content_nb_verification(t_game *game);
 
@@ -152,19 +174,29 @@ int window_initialisation(t_game *window);
 void obstacle_to_img(t_game *game);
 void ground_to_img(t_game *game);
 void other_to_img(t_game *game);
+void move_actualisation(t_game *game);
+void player_to_img(t_game *game);
 
+
+/* animation*/
+void animate_w(t_game *game);
+void animate_s(t_game *game);
+void animate_a(t_game *game);
+void animate_d(t_game *game);
 
 
 /*player*/
 void player_init(t_game *player);
 void map_actualisation(t_game *game, int lx, int ly);
+//void map_actualisation(t_game *game, int lx, int ly);
+
 
 /*img*/
 void image_initialisation(t_game *game);
 int render_maps(t_game *game);
 void img_parsing(t_game *game, int i, int j);
 void define_obstacle(t_game *game, int i, int j);
-void random_floor(t_game *game, int i, int j);
+void random_floor(t_game *game, int i, int j, int a);
 
 void	loop_images(t_game game);
 int	handle_resize(t_game *data);
@@ -180,6 +212,8 @@ int	ft_mouse(t_game *game);
 /* end */
 int game_victory(t_game *game);
 int game_close(t_game *game);
+int game_loose(t_game *game);
+
 
 /* free */
 void free_all_game(t_game *game);

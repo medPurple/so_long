@@ -6,7 +6,7 @@
 /*   By: wmessmer <wmessmer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 13:28:19 by wmessmer          #+#    #+#             */
-/*   Updated: 2023/01/11 15:44:52 by wmessmer         ###   ########.fr       */
+/*   Updated: 2023/01/16 14:15:38 by wmessmer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,6 @@
 
 void ground_to_img(t_game *game)
 {
-    game->ground = mlx_xpm_file_to_image(game->mlx,GROUND_IMG1,&game->img_width,&game->img_height);
-    if (game->img_width == 0 || game->img_height == 0)
-    {
-        ft_printf("stop");
-        mlx_error(1);
-    }
     game->img_ground1 = mlx_xpm_file_to_image(game->mlx,GROUND_IMG1,&game->img_width,&game->img_height);
     if (game->img_width == 0 || game->img_height == 0)
     {
@@ -68,9 +62,26 @@ void obstacle_to_img(t_game *game)
     }
 }
 
-void player_to_img()
+void player_to_img(t_game *game)
 {
-    
+    game->img_player = mlx_xpm_file_to_image(game->mlx,d_player_s,&game->img_width,&game->img_height);
+
+    game->player.w_player_static = mlx_xpm_file_to_image(game->mlx,w_player_s,&game->img_width,&game->img_height);
+    game->player.w_player_move1 = mlx_xpm_file_to_image(game->mlx,w_player_m1,&game->img_width,&game->img_height);
+    game->player.w_player_move2 = mlx_xpm_file_to_image(game->mlx,w_player_m2,&game->img_width,&game->img_height);
+
+    game->player.s_player_static = mlx_xpm_file_to_image(game->mlx,s_player_s,&game->img_width,&game->img_height);
+    game->player.s_player_move1 = mlx_xpm_file_to_image(game->mlx,s_player_m1,&game->img_width,&game->img_height);
+    game->player.s_player_move2 = mlx_xpm_file_to_image(game->mlx,s_player_m2,&game->img_width,&game->img_height);
+
+    game->player.a_player_static = mlx_xpm_file_to_image(game->mlx,a_player_s,&game->img_width,&game->img_height);
+    game->player.a_player_move1 = mlx_xpm_file_to_image(game->mlx,a_player_m1,&game->img_width,&game->img_height);
+    game->player.a_player_move2 = mlx_xpm_file_to_image(game->mlx,a_player_m2,&game->img_width,&game->img_height);
+
+    game->player.d_player_static = mlx_xpm_file_to_image(game->mlx,d_player_s,&game->img_width,&game->img_height);
+    game->player.d_player_move1 = mlx_xpm_file_to_image(game->mlx,d_player_m1,&game->img_width,&game->img_height);
+    game->player.d_player_move2 = mlx_xpm_file_to_image(game->mlx,d_player_m2,&game->img_width,&game->img_height);
+
 }
 
 void other_to_img(t_game *game)

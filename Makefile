@@ -18,21 +18,24 @@ SRC			=  srcs/map/map.c \
 			   srcs/utils/free_all_game.c \
 			   srcs/window/ft_init.c \
 			   srcs/window/xpm_to_image.c \
+			   srcs/window/key.c			\
 			   srcs/window/math_on_image.c \
 			   srcs/game/ft_game.c \
 			   srcs/game/player.c \
 
-SRCB		=  srcs/map/map_bonus.c \
+SRCB		=  srcs/map/map.c \
 		 	   srcs/map/verification_bonus.c \
 			   srcs/map/backtracking.c \
 			   srcs/utils/error.c \
 			   srcs/utils/verification_utils.c \
-			   srcs/utils/free_all_game.c \
+			   srcs/utils/free_all_game_bonus.c \
 			   srcs/window/ft_init_bonus.c \
 			   srcs/window/xpm_to_image.c \
+			   srcs/window/key.c			\
 			   srcs/window/math_on_image.c \
 			   srcs/game/ft_game.c \
-			   srcs/game/player.c \
+			   srcs/game/player_bonus.c \
+			   srcs/game/ft_animation_player.c \
 
 all:		$(MLX) $(LFT) $(NAME)
 

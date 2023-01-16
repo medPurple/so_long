@@ -6,73 +6,73 @@
 /*   By: wmessmer <wmessmer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 14:18:40 by wmessmer          #+#    #+#             */
-/*   Updated: 2023/01/13 08:30:14 by wmessmer         ###   ########.fr       */
+/*   Updated: 2023/01/16 19:45:38 by wmessmer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/so_long.h"
 
-int ft_action_keyboard(int key, t_game *game)
+int	game_victory(t_game *game)
 {
-    if (key == XK_Up || key == XK_w)      //move up
-        ft_move_player(game, game->player_y - 1 , game->player_x);
-    else if (key == XK_Down || key == XK_s) //move down
-        ft_move_player(game, game->player_y + 1 , game->player_x);
-    else if (key == XK_Right || key == XK_d) //move right
-        ft_move_player(game, game->player_y , game->player_x + 1);
-    else if (key == XK_Left || key == XK_a) //move left
-        ft_move_player(game, game->player_y , game->player_x - 1);
-    if (key == XK_Escape) // esc
-        game_close(game);
-    ft_printf("Move count : %d\n", game->moves);
-    return (0);  
+	ft_printf(YEL"================================");
+	ft_printf("===============================\n");
+	ft_printf("========================  [Victory !]  ====");
+	ft_printf("====================\n");
+	ft_printf("=======================================");
+	ft_printf("========================\n"COLOR_RESET);
+	ft_printf("\nNombre de deplacements totaux : %d\n", game->moves +1);
+	free_all_game(game);
+	ft_printf(GRN"\n======================== Exit completed ======");
+	ft_printf("=================\n\n"COLOR_RESET);
+	exit (0);
 }
 
-void ft_move_player(t_game *game, int y, int x)
+int	game_loose(t_game *game)
 {
-    int lx;
-    int ly;
-
-    lx = game->player_x;
-    ly = game->player_y;
-    if (game->map[y][x] == 'E' && game->collected == game->collectable)
-        game_victory(game);
-    else if (game->map[y][x] == 'C' || game->map[y][x] == '0')
-    {
-        game->map[ly][lx] = '0';
-        if (game->map[y][x] == 'C')
-            game->collected += 1;        
-        game->player_x = x;
-        game->player_y = y;
-        game->map[y][x] = 'P';
-        game->moves += 1;
-        map_actualisation(game,lx,ly);
-    }
-}
-    
-int game_victory(t_game *game)
-{
-    ft_printf(YEL"===============================================================\n");
-    ft_printf("========================  [Victory !]  ========================\n");
-    ft_printf("===============================================================\n"COLOR_RESET);
-
-    ft_printf("\nNombre de deplacements totaux : %d\n", game->moves +1);
-    free_all_game(game);
-    ft_printf(GRN"\n======================== Exit completed =======================\n\n"COLOR_RESET);
-    exit (0);
+	ft_printf(RED"======================================");
+	ft_printf("=========================\n");
+	ft_printf("========================  [Game over]  ====");
+	ft_printf("====================\n");
+	ft_printf("============================================");
+	ft_printf("===================\n"COLOR_RESET);
+	ft_printf("\nNombre de deplacements totaux : %d\n", game->moves +1);
+	free_all_game(game);
+	ft_printf(GRN"\n======================== Exit completed ====");
+	ft_printf("===================\n\n"COLOR_RESET);
+	exit (0);
 }
 
-int game_close(t_game *game)
+int	game_close(t_game *game)
 {
-    ft_printf(RED"======================== Game closed =========================\n"COLOR_RESET);
-    ft_printf("Deplacement effectue : %d\n", game->moves);
-    free_all_game(game);
-    ft_printf(GRN"======================== Exit completed ======================\n\n"COLOR_RESET);
-    exit(0);
-}
-
-int	ft_mouse(t_game *game)
-{
-	game_close(game);
+	ft_printf(RED"======================== Game closed ====");
+	ft_printf("=====================\n"COLOR_RESET);
+	ft_printf("\n                  Deplacement effectue : %d\n", game->moves);
+	free_all_game(game);
+	ft_printf(GRN"\n======================== Exit completed ====");
+	ft_printf("==================\n\n"COLOR_RESET);
 	exit(0);
+}
+
+void move_actualisation(t_game *game)
+{
+	char *mov ;
+	char *st;
+	char *str;
+	int i;
+	int j;
+	
+	j =  game->win_height - 24;
+	i = 0;
+	mov = ft_itoa(game->moves);
+	st = ft_strdup("Deplacement : ");
+	str = ft_strjoin(st , mov);
+	while (j++ < game->win_height)
+	{
+		while (i++ < game->win_width)
+			mlx_pixel_put(game->mlx,game->win,i,j, 0x000000);
+		i = 0;
+	}
+	mlx_string_put(game->mlx, game->win, (game->win_width / 2) - 48, game->win_height - 12   , 0xFF99FF, str);
+	free(str);
+	free(mov);
 }
