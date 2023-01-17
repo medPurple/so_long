@@ -6,7 +6,7 @@
 /*   By: wmessmer <wmessmer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 08:55:20 by wmessmer          #+#    #+#             */
-/*   Updated: 2023/01/13 12:07:00 by wmessmer         ###   ########.fr       */
+/*   Updated: 2023/01/17 11:56:30 by wmessmer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,19 @@ void ft_img_destroyer(t_game *game)
     mlx_destroy_image(game->mlx, game->img_exit_open);
     mlx_destroy_image(game->mlx, game->img_player);
     mlx_destroy_image(game->mlx, game->img_collectable);
+    mlx_destroy_image(game->mlx, game->player.w_player_static);
+    mlx_destroy_image(game->mlx, game->player.w_player_move1);
+    mlx_destroy_image(game->mlx, game->player.w_player_move2);
+    mlx_destroy_image(game->mlx, game->player.s_player_static);
+    mlx_destroy_image(game->mlx, game->player.s_player_move1);
+    mlx_destroy_image(game->mlx, game->player.s_player_move2);
+    mlx_destroy_image(game->mlx, game->player.a_player_static);
+    mlx_destroy_image(game->mlx, game->player.a_player_move1);
+    mlx_destroy_image(game->mlx, game->player.a_player_move2);
+    mlx_destroy_image(game->mlx, game->player.d_player_static);
+    mlx_destroy_image(game->mlx, game->player.d_player_move1);
+    mlx_destroy_image(game->mlx, game->player.d_player_move2);
+
 }
 
 void ft_map_destroyer(t_game *game)

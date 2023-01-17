@@ -6,7 +6,7 @@
 /*   By: wmessmer <wmessmer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 18:04:43 by wmessmer          #+#    #+#             */
-/*   Updated: 2023/01/16 19:31:27 by wmessmer         ###   ########.fr       */
+/*   Updated: 2023/01/17 19:40:43 by wmessmer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,26 +42,29 @@
 
 # define EXIT_IMG_C "img_xpm/exit_close.xpm"
 # define EXIT_IMG_O "img_xpm/exit_open.xpm"
+# define EXIT_IMG_O2 "img_xpm/exit_open_2.xpm"
 
 # define PLAYER_IMG "img_xpm/player_right_static.xpm"
 # define ENEMY_IMG1 "img_xpm/enemy_i.xpm"
+# define ENEMY_IMG2 "img_xpm/enemy1.xpm"
 # define COLLECTABLE_IMG1 "img_xpm/collectible.xpm"
 
-#define w_player_s "img_xpm/player_back_static.xpm"
-#define w_player_m1 "img_xpm/player_back_move1.xpm"
-#define w_player_m2 "img_xpm/player_back_move2.xpm"
 
-#define s_player_s "img_xpm/player_front_static.xpm"
-#define s_player_m1 "img_xpm/player_front_move1.xpm"
-#define s_player_m2 "img_xpm/player_front_move2.xpm"
+# define w_player_s "img_xpm/player_back_static.xpm"
+# define w_player_m1 "img_xpm/player_back_move1.xpm"
+# define w_player_m2 "img_xpm/player_back_move2.xpm"
 
-#define a_player_s "img_xpm/player_left_static.xpm"
-#define a_player_m1 "img_xpm/player_left_move1.xpm"
-#define a_player_m2 "img_xpm/player_left_move2.xpm"
+# define s_player_s "img_xpm/player_front_static.xpm"
+# define s_player_m1 "img_xpm/player_front_move1.xpm"
+# define s_player_m2 "img_xpm/player_front_move2.xpm"
 
-#define d_player_s "img_xpm/player_right_static.xpm"
-#define d_player_m1 "img_xpm/player_right_move1.xpm"
-#define d_player_m2 "img_xpm/player_right_move2.xpm"
+# define a_player_s "img_xpm/player_left_static.xpm"
+# define a_player_m1 "img_xpm/player_left_move1.xpm"
+# define a_player_m2 "img_xpm/player_left_move2.xpm"
+
+# define d_player_s "img_xpm/player_right_static.xpm"
+# define d_player_m1 "img_xpm/player_right_move1.xpm"
+# define d_player_m2 "img_xpm/player_right_move2.xpm"
 
 
 
@@ -100,7 +103,17 @@ typedef struct s_player
 	int 	key_d;
 	
 }	t_player;
+typedef struct s_enemy
+{
+	void *l_enemy;
+	void *t_enemy;
+	void *r_enemy;
+	void *d_enemy;
+	int	x_enemy;
+	int y_enemy;
+	int		frame_e;
 
+}	t_enemy;
 typedef struct s_game
 {
 	void	*mlx;
@@ -116,13 +129,15 @@ typedef struct s_game
 	void	*img_obstacle;
 	
 	void	*enemy_img1;
+	void	*enemy_img2;
 	void	*img_player;
 	void	*img_collectable;
 	void	*img_exit_close;
 	void	*img_exit_open;
+	void	*img_exit_open2;	
 	void	*img_start;
 	
-
+	int		frame_ex;	
 	char	**map; //ok
 	int		player_x;
 	int		player_y;
@@ -130,6 +145,7 @@ typedef struct s_game
 	int		img_height;//
 	int		win_width;//
 	int		win_height;//
+	int		ground_case;
 	int		moves;//
 	int		collected;//
 	int		collectable;//
@@ -139,6 +155,7 @@ typedef struct s_game
 	int		exit_y;
 	t_map	mappy;
 	t_player player;
+	t_enemy	enemy;
 }	t_game;
 
 /*map*/
@@ -182,13 +199,22 @@ void player_to_img(t_game *game);
 void animate_w(t_game *game);
 void animate_s(t_game *game);
 void animate_a(t_game *game);
-void animate_d(t_game *game);
+void animate_d(t_game *game,int lx, int ly);
+int ft_render(t_game *game);
 
 
 /*player*/
 void player_init(t_game *player);
 void map_actualisation(t_game *game, int lx, int ly);
 //void map_actualisation(t_game *game, int lx, int ly);
+
+/*enemy*/
+void generate_enemy(t_game *game);
+void move_enemy(t_game *game);
+void move_left(t_game *game,int x, int y);
+void move_right(t_game *game,int x, int y);
+void move_up(t_game *game,int x, int y);
+void move_down(t_game *game,int x, int y);
 
 
 /*img*/
@@ -197,11 +223,6 @@ int render_maps(t_game *game);
 void img_parsing(t_game *game, int i, int j);
 void define_obstacle(t_game *game, int i, int j);
 void random_floor(t_game *game, int i, int j, int a);
-
-void	loop_images(t_game game);
-int	handle_resize(t_game *data);
-int	handle_keypress(int keysym, t_game *data);
-int	handle_btnrealease(t_game *data);
 
 /* action */
 

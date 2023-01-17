@@ -6,7 +6,7 @@
 /*   By: wmessmer <wmessmer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 13:15:05 by wmessmer          #+#    #+#             */
-/*   Updated: 2023/01/14 15:04:25 by wmessmer         ###   ########.fr       */
+/*   Updated: 2023/01/17 14:26:46 by wmessmer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int main(int ac, char **av)
     window_initialisation(&game);
     mlx_hook(game.win, KeyPress, KeyPressMask, &ft_action_keyboard, &game);
     mlx_hook(game.win, ClientMessage, LeaveWindowMask, ft_mouse, &game);
+    mlx_loop_hook(game.mlx, ft_render,&game);
     mlx_loop(game.mlx);
     return (0);
 }

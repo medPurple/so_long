@@ -6,7 +6,7 @@
 /*   By: wmessmer <wmessmer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 19:22:48 by wmessmer          #+#    #+#             */
-/*   Updated: 2023/01/14 17:37:33 by wmessmer         ###   ########.fr       */
+/*   Updated: 2023/01/17 11:52:38 by wmessmer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ int window_initialisation(t_game *window)
 void image_initialisation(t_game *game)
 {
     obstacle_to_img(game);
+    player_to_img(game);
     game->img_ground1 = mlx_xpm_file_to_image(game->mlx,GROUND_IMG1,&game->img_width,&game->img_height);
     game->img_collectable = mlx_xpm_file_to_image(game->mlx,COLLECTABLE_IMG1,&game->img_width,&game->img_height);
-    game->img_player = mlx_xpm_file_to_image(game->mlx,PLAYER_IMG,&game->img_width,&game->img_height);
     game->img_exit_close = mlx_xpm_file_to_image(game->mlx,EXIT_IMG_C,&game->img_width,&game->img_height);
     game->img_exit_open = mlx_xpm_file_to_image(game->mlx,EXIT_IMG_O,&game->img_width,&game->img_height);
     render_maps(game);

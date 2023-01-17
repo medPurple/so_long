@@ -22,6 +22,8 @@ SRC			=  srcs/map/map.c \
 			   srcs/window/math_on_image.c \
 			   srcs/game/ft_game.c \
 			   srcs/game/player.c \
+   			   srcs/game/ft_animation_player.c \
+
 
 SRCB		=  srcs/map/map.c \
 		 	   srcs/map/verification_bonus.c \
@@ -35,7 +37,9 @@ SRCB		=  srcs/map/map.c \
 			   srcs/window/math_on_image.c \
 			   srcs/game/ft_game.c \
 			   srcs/game/player_bonus.c \
-			   srcs/game/ft_animation_player.c \
+			   srcs/game/ft_animation_player_bonus.c \
+			   srcs/game/ft_enemy.c \
+			   srcs/game/ft_move_enemy.c \
 
 all:		$(MLX) $(LFT) $(NAME)
 

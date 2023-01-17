@@ -6,7 +6,7 @@
 /*   By: wmessmer <wmessmer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 11:19:57 by wmessmer          #+#    #+#             */
-/*   Updated: 2023/01/13 17:58:22 by wmessmer         ###   ########.fr       */
+/*   Updated: 2023/01/17 16:16:49 by wmessmer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	pathfinder(t_game *game, int i, int j, int **grid)
 		game->collectable_valid++;
 	if (grid[i][j] == 1)
 		return (game->collectable_valid);
+	game->ground_case++;
 	grid[i][j] = 1;
 	game->collectable_valid = pathfinder(game, i + 1, j, grid);
 	game->collectable_valid = pathfinder(game, i, j + 1, grid);

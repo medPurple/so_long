@@ -6,7 +6,7 @@
 /*   By: wmessmer <wmessmer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 19:22:48 by wmessmer          #+#    #+#             */
-/*   Updated: 2023/01/16 14:13:47 by wmessmer         ###   ########.fr       */
+/*   Updated: 2023/01/17 16:13:00 by wmessmer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int render_maps(t_game *game)
         width = 0;
         i++;
     }
+    generate_enemy(game);
     return (1);
 }
 void img_parsing(t_game *game, int i, int j)

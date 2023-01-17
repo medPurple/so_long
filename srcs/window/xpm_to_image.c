@@ -6,7 +6,7 @@
 /*   By: wmessmer <wmessmer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 13:28:19 by wmessmer          #+#    #+#             */
-/*   Updated: 2023/01/16 14:15:38 by wmessmer         ###   ########.fr       */
+/*   Updated: 2023/01/17 19:40:34 by wmessmer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,12 @@ void other_to_img(t_game *game)
         ft_printf("stop");
         mlx_error(1);
     }
+    game->enemy_img2 = mlx_xpm_file_to_image(game->mlx,ENEMY_IMG2,&game->img_width,&game->img_height); 
+    if (game->img_width == 0 || game->img_height == 0)
+    {
+        ft_printf("stop");
+        mlx_error(1);
+    }
     game->img_exit_close = mlx_xpm_file_to_image(game->mlx,EXIT_IMG_C,&game->img_width,&game->img_height);
     if (game->img_width == 0 || game->img_height == 0)
     {
@@ -106,6 +112,12 @@ void other_to_img(t_game *game)
     }
     game->img_exit_open = mlx_xpm_file_to_image(game->mlx,EXIT_IMG_O,&game->img_width,&game->img_height);
     if (game->img_width == 0 || game->img_height == 0)
+    {
+        ft_printf("stop");
+        mlx_error(1);
+    }
+    game->img_exit_open2 = mlx_xpm_file_to_image(game->mlx,EXIT_IMG_O2,&game->img_width,&game->img_height);
+    if (game->img_exit_open2 == NULL)
     {
         ft_printf("stop");
         mlx_error(1);

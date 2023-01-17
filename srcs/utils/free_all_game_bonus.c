@@ -6,7 +6,7 @@
 /*   By: wmessmer <wmessmer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 08:55:20 by wmessmer          #+#    #+#             */
-/*   Updated: 2023/01/16 19:41:27 by wmessmer         ###   ########.fr       */
+/*   Updated: 2023/01/17 14:48:26 by wmessmer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void ft_img_destroyer(t_game *game)
     
     mlx_destroy_image(game->mlx, game->img_exit_close);
     mlx_destroy_image(game->mlx, game->img_exit_open);
+    mlx_destroy_image(game->mlx, game->img_exit_open2);
+
     mlx_destroy_image(game->mlx, game->img_player);
     mlx_destroy_image(game->mlx, game->img_collectable);
 

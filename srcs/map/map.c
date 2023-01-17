@@ -6,7 +6,7 @@
 /*   By: wmessmer <wmessmer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 18:15:10 by wmessmer          #+#    #+#             */
-/*   Updated: 2023/01/14 16:32:55 by wmessmer         ###   ########.fr       */
+/*   Updated: 2023/01/17 18:44:49 by wmessmer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,7 @@ void	map_final_init(t_game *game)
 	game->moves = 0;
 	game->collectable = game->mappy.collectible_count;
 	game->collected = 0;
+	game->ground_case = 0;
+	game->frame_ex = 0;
+	game->enemy.frame_e = 0;
 }

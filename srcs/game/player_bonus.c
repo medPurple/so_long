@@ -6,7 +6,7 @@
 /*   By: wmessmer <wmessmer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 11:56:16 by wmessmer          #+#    #+#             */
-/*   Updated: 2023/01/16 19:42:54 by wmessmer         ###   ########.fr       */
+/*   Updated: 2023/01/17 19:25:35 by wmessmer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,7 @@ void	ft_move_player(t_game *game, int y, int x)
 
 void	map_actualisation(t_game *game, int lx, int ly)
 {
-	if (game->collected == game->collectable)
-		mlx_put_image_to_window(game->mlx, game->win, game->img_exit_open \
-		, game->exit_x * IMG_SIZE, game->exit_y * IMG_SIZE);
-	
+	static int a = 0;
 	if (game->player.key_w == 1)
 	{
 		game->player.key_w = 0;
@@ -84,7 +81,7 @@ void	map_actualisation(t_game *game, int lx, int ly)
 	else if  (game->player.key_d == 1)
 	{
 		game->player.key_d = 0;
-		animate_d(game);
+		animate_d(game,lx,ly);
 
 	}	
 	mlx_put_image_to_window(game->mlx, game->win \
@@ -93,3 +90,32 @@ void	map_actualisation(t_game *game, int lx, int ly)
 }
 //	mlx_string_put(game->mlx, window->win, (game->win_width / 2) - 48, game->win_height + 12   , 0xFF99FF, "Deplacememt : " + game->moves);
 //
+int ft_render(t_game *game)
+{
+	static int loop = 0;
+	game->frame_ex++;
+	game->enemy.frame_e++;
+	if (game->frame_ex == 30000)
+    {
+		if (game->collected == game->collectable)
+		{
+			if (loop == 0)
+			{
+        		mlx_put_image_to_window(game->mlx, game->win, game->img_exit_open2, game->exit_x * IMG_SIZE, game->exit_y * IMG_SIZE);
+				loop++;
+			}
+			else if (loop == 1)
+    		{
+        		loop = 0;
+        		mlx_put_image_to_window(game->mlx, game->win, game->img_exit_open, game->exit_x * IMG_SIZE, game->exit_y * IMG_SIZE);
+    		}
+		}
+		game->frame_ex = 0;
+	}
+	if (game->enemy.frame_e == 25000)
+	{
+		move_enemy(game);
+		game->enemy.frame_e = 0;
+	}
+    return(1);
+}
