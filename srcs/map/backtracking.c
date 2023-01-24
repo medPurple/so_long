@@ -6,7 +6,7 @@
 /*   By: wmessmer <wmessmer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 11:19:57 by wmessmer          #+#    #+#             */
-/*   Updated: 2023/01/17 16:16:49 by wmessmer         ###   ########.fr       */
+/*   Updated: 2023/01/23 15:04:22 by wmessmer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,12 @@ int	map_verification_path(t_game *game)
 	game->mappy.collectible_count)
 	{
 		ft_map_destroyer_int(grid, game);
-		return (ft_printf("Can't collect everything\n"), 0);
+		return (map_error(7));
 	}
 	if (game->end_game_ok != 1)
 	{
 		ft_map_destroyer_int(grid, game);
-		return (ft_printf("Can't reach the exit\n"), 0);
+		return (map_error(8));
 	}
 	ft_map_destroyer_int(grid, game);
 	return (1);

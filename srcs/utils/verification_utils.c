@@ -12,7 +12,7 @@
 
 #include "../../include/so_long.h"
 
-int nb_ligne(char *path)
+int	nb_ligne(char *path)
 {
 	int		fd;
 	char	*line;
@@ -31,42 +31,45 @@ int nb_ligne(char *path)
 	return (line_count);
 }
 
-void exit_init(t_game *game)
+void	exit_init(t_game *game)
 {
-    int i;
-    int j;
+	int	i;
+	int	j;
 
-    i = 0;
-    while (i < game->mappy.row)
-    {
-        j = 0;
-        while (j < game->mappy.col)
-        {
-            if (game->map[i][j] == 'E')
-            {
-                game->exit_y = i;
-                game->exit_x = j;
-            }
-            j++;
-        }
-        i++;
-    }
+	i = 0;
+	while (i < game->mappy.row)
+	{
+		j = 0;
+		while (j < game->mappy.col)
+		{
+			if (game->map[i][j] == 'E')
+			{
+				game->exit_y = i;
+				game->exit_x = j;
+			}
+			j++;
+		}
+		i++;
+	}
 }
 
-void printmap(int **map_copy, int r, int c)
+void	printmap(int **map_copy, int r, int c)
 {
-    int i = 0;
-    int j = 0;
-    while (i < r)
-    {
-        while (j < c)
-        {
-            ft_printf("%d",map_copy[i][j]);
-            j++;
-        }
-        j = 0;
-        i++;
-        printf("\n");
-    }
-    printf("\n");
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (i < r)
+	{
+		while (j < c)
+		{
+			ft_printf("%d", map_copy[i][j]);
+			j++;
+		}
+		j = 0;
+		i++;
+		printf("\n");
+	}
+	printf("\n");
 }

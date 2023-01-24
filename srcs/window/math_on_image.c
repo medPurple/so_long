@@ -12,32 +12,37 @@
 
 #include "../../include/so_long.h"
 
-void define_obstacle(t_game *game, int j, int i)
+void	define_obstacle(t_game *game, int j, int i)
 {
-    if (j == (game->win_width/48 - 1))
-      mlx_put_image_to_window(game->mlx, game->win, game->img_wall_side, j * IMG_SIZE, i * IMG_SIZE);
-    else if (j == 0 ) 
-        mlx_put_image_to_window(game->mlx, game->win, game->img_wall_side, j * IMG_SIZE, i * IMG_SIZE);
-    else if (i == 0)
-        mlx_put_image_to_window(game->mlx, game->win, game->img_wall_front, j * IMG_SIZE, i * IMG_SIZE);
-    else if (i == (game->win_height/48 - 1))
-        mlx_put_image_to_window(game->mlx, game->win, game->img_wall_front, j * IMG_SIZE, i * IMG_SIZE);
-    else
-        mlx_put_image_to_window(game->mlx, game->win, game->img_obstacle, j * IMG_SIZE, i * IMG_SIZE);
-
+	if (j == (game->win_width / 48 - 1))
+		mlx_put_image_to_window(game->mlx, \
+			game->win, game->img_wall_side, j * IMG_SIZE, i * IMG_SIZE);
+	else if (j == 0)
+		mlx_put_image_to_window(game->mlx, \
+			game->win, game->img_wall_side, j * IMG_SIZE, i * IMG_SIZE);
+	else if (i == 0)
+		mlx_put_image_to_window(game->mlx, \
+			game->win, game->img_wall_front, j * IMG_SIZE, i * IMG_SIZE);
+	else if (i == (game->win_height / 48 - 1))
+		mlx_put_image_to_window(game->mlx, \
+			game->win, game->img_wall_front, j * IMG_SIZE, i * IMG_SIZE);
+	else
+		mlx_put_image_to_window(game->mlx, \
+			game->win, game->img_obstacle, j * IMG_SIZE, i * IMG_SIZE);
 }
-    
 
-
-void random_floor(t_game *game, int i, int j, int a)
+void	random_floor(t_game *game, int i, int j, int a)
 {
-    if (a == 100)
-        mlx_put_image_to_window(game->mlx, game->win, game->img_ground4, j * IMG_SIZE, i * IMG_SIZE);
-    else if (a <= 20)    
-        mlx_put_image_to_window(game->mlx, game->win, game->img_ground2, j * IMG_SIZE, i * IMG_SIZE);
-    else if (a >= 21 && a <= 40)
-        mlx_put_image_to_window(game->mlx, game->win, game->img_ground3, j * IMG_SIZE, i * IMG_SIZE);
-    else 
-        mlx_put_image_to_window(game->mlx, game->win, game->img_ground1, j * IMG_SIZE, i * IMG_SIZE);
-
+	if (a == 100)
+		mlx_put_image_to_window(game->mlx, \
+			game->win, game->img_ground4, j * IMG_SIZE, i * IMG_SIZE);
+	else if (a <= 20)
+		mlx_put_image_to_window(game->mlx, \
+			game->win, game->img_ground2, j * IMG_SIZE, i * IMG_SIZE);
+	else if (a >= 21 && a <= 40)
+		mlx_put_image_to_window(game->mlx, \
+			game->win, game->img_ground3, j * IMG_SIZE, i * IMG_SIZE);
+	else
+		mlx_put_image_to_window(game->mlx, \
+			game->win, game->img_ground1, j * IMG_SIZE, i * IMG_SIZE);
 }

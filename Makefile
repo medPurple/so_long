@@ -16,6 +16,7 @@ SRC			=  srcs/map/map.c \
 			   srcs/utils/error.c \
 			   srcs/utils/verification_utils.c \
 			   srcs/utils/free_all_game.c \
+			   srcs/utils/clear_image.c \
 			   srcs/window/ft_init.c \
 			   srcs/window/xpm_to_image.c \
 			   srcs/window/key.c			\
@@ -23,6 +24,8 @@ SRC			=  srcs/map/map.c \
 			   srcs/game/ft_game.c \
 			   srcs/game/player.c \
    			   srcs/game/ft_animation_player.c \
+			   srcs/window/ft_img_init.c \
+			   srcs/window/ft_img_verif.c \
 
 
 SRCB		=  srcs/map/map.c \
@@ -30,7 +33,8 @@ SRCB		=  srcs/map/map.c \
 			   srcs/map/backtracking.c \
 			   srcs/utils/error.c \
 			   srcs/utils/verification_utils.c \
-			   srcs/utils/free_all_game_bonus.c \
+			   srcs/utils/free_all_game.c \
+			   srcs/utils/clear_image.c \
 			   srcs/window/ft_init_bonus.c \
 			   srcs/window/xpm_to_image.c \
 			   srcs/window/key.c			\
@@ -40,6 +44,8 @@ SRCB		=  srcs/map/map.c \
 			   srcs/game/ft_animation_player_bonus.c \
 			   srcs/game/ft_enemy.c \
 			   srcs/game/ft_move_enemy.c \
+			   srcs/window/ft_img_init.c \
+			   srcs/window/ft_img_verif_bonus.c			   
 
 all:		$(MLX) $(LFT) $(NAME)
 

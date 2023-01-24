@@ -6,7 +6,7 @@
 /*   By: wmessmer <wmessmer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 18:15:10 by wmessmer          #+#    #+#             */
-/*   Updated: 2023/01/17 18:44:49 by wmessmer         ###   ########.fr       */
+/*   Updated: 2023/01/23 15:19:40 by wmessmer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,15 @@ char	**map_generation(char *file)
 	if (fd == -1)
 		return (NULL);
 	map = ft_strdup("");
-	while ((fichier = get_next_line(fd)))
+	fichier = get_next_line(fd);
+	while (fichier)
 	{
 		if (!fichier)
 			return (NULL);
 		backup = map;
 		map = ft_strjoin(backup, fichier);
 		free(fichier);
+		fichier = get_next_line(fd);
 	}
 	map_final = ft_split(map, '\n');
 	free(map);
@@ -75,4 +77,7 @@ void	map_final_init(t_game *game)
 	game->ground_case = 0;
 	game->frame_ex = 0;
 	game->enemy.frame_e = 0;
+	game->exit_loop = 0;
+	game->enemy.move = 0;
+	game->enemy.exist = 0;
 }
